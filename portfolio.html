@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ja">
+<html lang="en">
+<head>
+	<!-- 文字コード -->
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<!-- フォント用のリンクラベル -->
+  <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat+Subrayada" rel="stylesheet">
+
+	<!-- 基本CSS -->
+	<link rel="stylesheet" href="css/section.css">
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- ヘッダークリックアニメーション用 -->
+	<script type="text/javascript" src="js/practice.js"></script>
+	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+
+	<!-- マウスホイールアニメーション用 -->
+	<script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+	<script>
+		//ヘッダURLの初期表示
+		history.replaceState("","","#1");
+
+		// ヘッダークリックイベント
+		$(function(){
+			$('a[href^=#]').click(function(){
+				var speed = 500;
+				var href= $(this).attr("href");
+				var target = $(href == "#" || href == "" ? 'html' : href);
+				var position = target.offset().top;
+				$("html, body").animate({scrollTop:position}, speed, "swing");
+				history.replaceState("","",target.selector);
+				return false;
+			});
+		});
+
+		//	マウスホイールイベント
+    var index = 0;
+    var interval = 100;
+    var last_time = 0;
+		$(function(){
+		    var mousewheelevent = 'onwheel' in document ? 'wheel' : 'onmousewheel' in document ? 'mousewheel' : 'DOMMouseScroll';
+		    $(document).on(mousewheelevent,function(e){
+		        e.preventDefault();
+		        var delta = e.originalEvent.deltaY ? -(e.originalEvent.deltaY) : e.originalEvent.wheelDelta ? e.originalEvent.wheelDelta : -(e.originalEvent.detail);
+						var now = new Date().getTime();
+		 				if (now - last_time > interval){
+						 	test(delta);
+		 		 		}
+		 				last_time = now;
+		    });
+			});
+	</script>
+</head>
+<body mousewheelevent="test()">
+	<div class="page-header">
+    <ul>
+      <li><a href="#1">Home</a></li>
+      <li><a href="#2">Profile</a></li>
+      <li><a href="#3">Skill</a></li>
+      <li><a href="#4">Work</a></li>
+      <li><a href="#5">Contact</a></li>
+    </ul>
+  </div>
+
+	<section id="1" class="section page1">
+		<div class="title vhs-blur">
+	    <h1>Hatasako Yoshikazu</h1>
+	    <p>WEB Engineer</p>
+	  </div>
+	</section>
+
+	<section id="2" class="section page2">
+		<div class="profile">
+      <div class="profile-wrapper">
+        <h1>Profile</h1>
+				<div class="profile-image">
+					<img src="images/profile-images/1.jpg">
+					<img src="images/profile-images/2.jpg">
+					<img src="images/profile-images/3.jpg">
+					<img src="images/profile-images/4.jpg">
+					<img src="images/profile-images/5.jpg">
+					<img src="images/profile-images/7.jpg">
+				</div>
+        <h1>自己紹介</h1>
+        <p>
+          初めまして、私は畑迫睦和と申します。
+          大学のときに初めてプログラムを学び、システム開発の仕事に興味を持ちました。
+          会社ではWindowsの業務アプリの開発、テストをしています。個人ではWEB系の開発をしています。
+					プロフィールの写真は以前中国に3週間旅行に行ったときの写真です。お楽しみいただけたら幸いです。
+        </p>
+      </div>
+	  </div>
+	</section>
+
+	<section id="3" class="section page3">
+		<div class="skill">
+	    <h1>Skill</h1>
+        <div class="skill-wrapper">
+          <div class="skill-frontend">
+            <h3>Frontend</h3>
+            <img src="images/frontend.jpg">
+            <p>HTML5</p>
+            <p>CSS3</p>
+            <p>javascript</p>
+          </div>
+          <div class="skill-backend">
+            <h3>Backend</h3>
+            <img src="images/backend.jpg">
+            <p>Ruby, C#, C++, C</p>
+            <p>Ruby on Rails</p>
+            <p>.net</p>
+            <p>CACHE, Oracle</p>
+            <p>Postgresql</p>
+          </div>
+          <div class="skill-tool">
+            <h3>Tool Service</h3>
+            <img src="images/tool.jpg">
+            <p>Atom editor</p>
+            <p>Git hub</p>
+            <p>CodeAnywhere</p>
+            <p>Heroku</p>
+          </div>
+        </div>
+	  </div>
+	</section>
+
+	<section id="4" class="section page4">
+		<div class="work">
+      <h1>Works</h1>
+        <div class="work-image">
+          <a onclick="clickBtn('work1')"><img src="images/portfolio.jpg" alt="" /></a>
+          <a onclick="clickBtn('work2')"><img src="images/bike_union.jpg" alt="" /></a>
+          <a onclick="clickBtn('work3')"><img src="images/RaspiGit.jpg" alt="" /></a>
+        </div>
+				<div class="works-wrapper">
+					<div class="works" id="work1">
+						<h4>Portforio Site</h4>
+						<div>
+							<p class="works-left">URL</p>
+							<p class="works-right"><a href="https://hatasako01.github.io/portfolio.html">https://hatasako01.github.io/portfolio.html</a></p>
+						</div>
+						<hr size="">
+						<div>
+							<p class="works-left">説明</p>
+		          <p class="works-right">当サイトです。自分でJS組んででページをスライド遷移させています。Worksでの詳細の表示非表示はjavascriptで実装しています。最終的にはスクロール時のアニメーションやWorkの表示、非表示時にスライドして表示させるようなアニメーションを実装する予定です。</p>
+						</div>
+						<hr size="">
+						<div>
+							<p class="works-left">使用した技術</p>
+							<p class="works-right">HTML5,CSS,JQuery</p>
+						</div>
+						<hr size="">
+					</div>
+					<div class="works" id="work2">
+						<h4>Bike_Union</h4>
+						<div>
+							<p class="works-left">URL</p>
+							<p class="works-right"><a href="https://afternoon-reaches-16773.herokuapp.com/">https://afternoon-reaches-16773.herokuapp.com/</a></p>
+						</div>
+						<hr size="">
+						<div>
+							<p class="works-left">説明</p>
+		          <p class="works-right">個人が簡単なバイクのブログを作ることができ、 また他のユーザーの投稿を見て共有したりできます。 個人でバイクブログを作っている方はよくいるかもしれませんが、 そのブログを集めてひとつのサイトに集約しすることで、 それぞれのバイクLifeを見たユーザーが新たな発見や楽しみ方を知るきっかけになるのではないかと考えています。後々は、このサイトを通じて知り合った方がツーリングに行けたり 趣味のつながりを広げるきっかけも作りたいという思いもあります。なので最終的にはブログから、バイクツーリングマッチングサイトにも発展させていけたらと考えています。</p>
+						</div>
+						<hr size="">
+						<div>
+							<p class="works-left">使用した技術</p>
+							<p class="works-right">Ruby on Rails,Ruby,HTML5,CSS, Postgresql,CodeAnywhere,HerokuToolbelt</p>
+						</div>
+						<hr size="">
+					</div>
+					<div class="works" id="work3">
+						<h4>RaspberryPi Git Server</h4>
+						<div>
+							<p class="works-left">URL</p>
+							<p class="works-right">なし</p>
+						</div>
+							<hr size="">
+						<div>
+							<p class="works-left">説明</p>
+							<p class="works-right">個人プロジェクト用のソース管理をするために作成しました。</p>
+						</div>
+						<hr size="">
+						<div>
+							<p class="works-left">使用した技術</p>
+							<p class="works-right">Raspberry Pi 3 Model B,Git,Term Viewer Cliant,Xrdp</p>
+						</div>
+						<hr size="">
+					</div>
+				</div>
+			</div>
+	</section>
+
+	<section id="5" class="section page5">
+		<div class="contact">
+      <div class="contact-wrapper">
+        <h1>Contact</h1>
+        <p>もし、私や作品に興味がございましたら、</p>
+        <p>お気軽にご連絡ください。</p>
+        <p>h.yoshikazu0110@gmail.com</p>
+      </div>
+	  </div>
+	</section>
+
+</body>
+
+</html>
